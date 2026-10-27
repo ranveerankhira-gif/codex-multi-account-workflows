@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "repository": "ranveerankhira-gif/codex-multi-account-workflows",
+  "skills": [
+    {
+      "name": "main-account-takeover",
+      "display_name_zh": "多账号任务接力",
+      "purpose_zh": "在显式配置的本机 Codex 账号之间核对历史、附件与项目现场并安全接力",
+      "release": "v0.1.0",
+      "platforms": [
+        "windows"
+      ],
+      "risk_level": "high",
+      "permissions": {
+        "network": false,
+        "filesystem_read": true,
+        "filesystem_write": true,
+        "credentials": true,
+        "external_state": false,
+        "cost_or_quota": false
+      },
+      "dependencies": [
+        "Windows 10/11",
+        "Python 3.10+",
+        "Windows OCR（检查被引用图片中的疑似凭据）",
+        "可选：Git（核验 Git 项目现场）"
+      ],
+      "invocation_policy": "explicit-only",
+      "license": "MIT",
+      "version": "0.1.0",
+      "archive_sha256": null
+    }
+  ]
+}

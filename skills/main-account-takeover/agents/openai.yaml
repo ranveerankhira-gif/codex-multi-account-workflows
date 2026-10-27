@@ -1,0 +1,7 @@
+interface:
+  display_name: "多账号任务接力"
+  short_description: "从显式配置的本机 Codex 账号中定位原任务并安全接力"
+  default_prompt: "使用 $main-account-takeover 在我指定的本机 Codex 账号之间核对历史、附件和项目现场并安全接力。"
+
+policy:
+  allow_implicit_invocation: false

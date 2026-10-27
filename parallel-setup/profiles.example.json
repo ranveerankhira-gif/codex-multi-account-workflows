@@ -1,0 +1,17 @@
+{
+  "profiles": [
+    {
+      "name": "account-a",
+      "root": "D:\\CodexProfiles\\account-a"
+    },
+    {
+      "name": "account-b",
+      "root": "D:\\CodexProfiles\\account-b"
+    },
+    {
+      "name": "account-c",
+      "root": "D:\\CodexProfiles\\account-c"
+    }
+  ]
+}
+

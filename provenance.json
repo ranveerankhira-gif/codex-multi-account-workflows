@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-26",
+  "policy": {
+    "allowed_classifications": [
+      "self-authored",
+      "substantially-adapted"
+    ],
+    "substantial_adaptation_requires": [
+      "fixed upstream repository and revision",
+      "upstream license preserved inside the Skill directory",
+      "SOURCE.md describing concrete structural and behavioral changes",
+      "changes beyond renaming, translation, trigger edits, or safety notes"
+    ]
+  },
+  "skills": [
+    {
+      "name": "main-account-takeover",
+      "classification": "self-authored",
+      "license": "MIT",
+      "evidence": [
+        "Created for a local three-account Codex relay workflow and developed through local recovery tests.",
+        "The public copy implements bounded discovery, schema-versioned handoff bundles, project-state verification, credential scanning, account binding, and return-chain validation."
+      ],
+      "upstream": null
+    }
+  ],
+  "excluded": []
+}
+

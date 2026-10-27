@@ -1,0 +1,8 @@
+{
+  "accounts": [
+    {"name": "account-a", "codexHome": "D:\\CodexAccounts\\account-a"},
+    {"name": "account-b", "codexHome": "D:\\CodexAccounts\\account-b"},
+    {"name": "account-c", "codexHome": "D:\\CodexAccounts\\account-c"}
+  ],
+  "notes": "Keep the real account map outside the Skill directory and pass homes explicitly."
+}

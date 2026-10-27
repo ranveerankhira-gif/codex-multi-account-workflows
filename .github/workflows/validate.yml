@@ -1,0 +1,57 @@
+name: validate
+
+on:
+  push:
+    branches: [main, "codex/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  portable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -X utf8 scripts/validate_repo.py
+      - run: python -X utf8 scripts/package_release.py --release all --verify-only
+      - run: python -X utf8 -m unittest discover -s scripts/tests -v
+      - run: python -X utf8 -m unittest discover -s skills/main-account-takeover/tests -v
+      - run: python -m compileall -q skills scripts
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - shell: pwsh
+        run: python -X utf8 scripts/validate_repo.py
+      - shell: pwsh
+        run: python -X utf8 scripts/package_release.py --release all --verify-only
+      - shell: pwsh
+        run: python -X utf8 -m unittest discover -s scripts/tests -v
+      - shell: pwsh
+        run: python -X utf8 -m unittest discover -s skills/main-account-takeover/tests -v
+      - shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path 'parallel-setup/Start-CodexProfile.ps1'),
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+          $plan = powershell.exe -NoProfile -File parallel-setup/Start-CodexProfile.ps1 -Profile account-a -ConfigPath parallel-setup/profiles.example.json -PlanOnly | ConvertFrom-Json
+          if ($plan.profile -ne 'account-a' -or $plan.creates_directories -ne $false -or $plan.launches_official_appx -ne $false) {
+            throw 'PlanOnly output is invalid.'
+          }
+

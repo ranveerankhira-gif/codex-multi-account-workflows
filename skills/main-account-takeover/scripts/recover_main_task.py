@@ -141,7 +141,12 @@ def canonical(path: Path, *, must_exist: bool = True) -> Path:
 
 
 def same_path(left: Path, right: Path) -> bool:
-    return os.path.normcase(str(left)) == os.path.normcase(str(right))
+    try:
+        return os.path.samefile(left, right)
+    except (OSError, ValueError):
+        left_key = os.path.normcase(str(canonical(Path(left), must_exist=False)))
+        right_key = os.path.normcase(str(canonical(Path(right), must_exist=False)))
+        return left_key == right_key
 
 
 def same_account(left: object, right: object) -> bool:
@@ -1153,6 +1158,7 @@ def project_file_manifest(
     project: Path,
     allowed_external_link_paths: list[str] | tuple[str, ...] = (),
 ) -> dict[str, Any]:
+    project = canonical(project)
     state = capture_project_state(project)
     if state["is_git_repository"]:
         if allowed_external_link_paths:
@@ -1257,7 +1263,12 @@ def extract_referenced_file_paths(messages: list[dict[str, Any]]) -> list[Path]:
         if "## My request:" in section:
             section = section.split("## My request:", 1)[0]
         for line in section.splitlines():
-            match = re.match(r"^##\s+.+?:\s*([A-Za-z]:[\\/].+?)\s*$", line.strip())
+            match = re.match(
+                r"^##\s+.+?:\s*((?:[A-Za-z]:[\\/]|\\\\[^\\/]+[\\/][^\\/]+[\\/]).+?)\s*$",
+                line.strip(),
+            )
+            if not match and os.name != "nt":
+                match = re.match(r"^##\s+.+?:\s*(/.+?)\s*$", line.strip())
             if not match:
                 continue
             raw_path = match.group(1).strip().strip('`"')

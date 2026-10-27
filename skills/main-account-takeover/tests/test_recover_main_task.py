@@ -474,7 +474,7 @@ class TakeoverRegressionTests(unittest.TestCase):
             original_read_stable = MODULE.read_stable
 
             def fake_read_stable(path: Path, attempts: int = 3) -> bytes:
-                if Path(path) == unreadable_session:
+                if MODULE.same_path(Path(path), unreadable_session):
                     raise MODULE.TakeoverError(
                         f"会话文件超过 512 MiB 上限: {unreadable_session}"
                     )

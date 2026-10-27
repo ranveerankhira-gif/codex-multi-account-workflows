@@ -54,7 +54,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\parallel-setup\Start-C
 4. 真实账号表必须保存在 Skill 目录外。
 5. 重启 Codex 后，通过 `$main-account-takeover` 显式调用。
 
-整套仓库下载文件名为 `codex-multi-account-workflows-v0.1.0.zip`，其中同时包含并行启动模板与接力 Skill。
+整套仓库下载文件名为 `codex-multi-account-workflows-v0.1.1.zip`，其中同时包含并行启动模板与接力 Skill。
 
 ## 安全边界
 

@@ -6,7 +6,7 @@
       "name": "main-account-takeover",
       "display_name_zh": "多账号任务接力",
       "purpose_zh": "在显式配置的本机 Codex 账号之间核对历史、附件与项目现场并安全接力",
-      "release": "v0.1.0",
+      "release": "v0.1.1",
       "platforms": [
         "windows"
       ],
@@ -27,7 +27,7 @@
       ],
       "invocation_policy": "explicit-only",
       "license": "MIT",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "archive_sha256": "ff73d2caa85203aa6e0ce8b8913b0b84672e257724ff0f13d7f4bbcda2a15fae"
     }
   ]

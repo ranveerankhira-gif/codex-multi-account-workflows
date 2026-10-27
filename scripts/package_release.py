@@ -96,7 +96,7 @@ def reset_dist() -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--release", choices=("v0.1.0", "all"), default="all")
+    parser.add_argument("--release", choices=("v0.1.1", "all"), default="all")
     parser.add_argument("--verify-only", action="store_true", help="Build in a temporary directory and leave catalog/dist unchanged.")
     args = parser.parse_args()
     catalog_path = ROOT / "catalog.json"

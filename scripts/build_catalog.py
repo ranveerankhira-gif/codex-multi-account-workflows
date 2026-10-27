@@ -33,7 +33,7 @@ def main() -> int:
                 "name": NAME,
                 "display_name_zh": display_name(),
                 "purpose_zh": "在显式配置的本机 Codex 账号之间核对历史、附件与项目现场并安全接力",
-                "release": "v0.1.0",
+                "release": "v0.1.1",
                 "platforms": ["windows"],
                 "risk_level": "high",
                 "permissions": {
@@ -52,7 +52,7 @@ def main() -> int:
                 ],
                 "invocation_policy": "explicit-only",
                 "license": "MIT",
-                "version": "0.1.0",
+                "version": "0.1.1",
                 "archive_sha256": None,
             }
         ],

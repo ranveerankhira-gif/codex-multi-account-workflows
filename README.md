@@ -1,13 +1,27 @@
 # Codex 多账号并行与任务接力
 
-一套面向 Windows Codex 桌面端的可审计工作流：用独立 `CODEX_HOME` 与 Electron 数据目录并行运行多个本机账号，并用校验过的接力包在账号之间继续未完成任务。
+**在一台 Windows 电脑上同时运行多个 Codex 账号，并把未完成任务可靠地交给另一个账号继续。**
 
-> Auditable Windows workflows for isolated Codex desktop profiles and verified cross-account task handoffs.
+这个仓库把两件必须配套的事放在一起：先用独立 `CODEX_HOME` 和 Electron 数据目录隔离多个本机账号，再用经过清单与哈希验证的接力包传递任务上下文。账号不会共享登录态，接力也不会偷偷继承旧授权。
+
+> Run isolated Codex desktop profiles side by side on Windows, then hand off unfinished tasks across local accounts with verifiable context bundles.
 
 [![Skill](https://img.shields.io/badge/skill-1-2563eb)](#包含内容)
+[![Latest release](https://img.shields.io/github/v/release/ranveerankhira-gif/codex-multi-account-workflows?label=release)](https://github.com/ranveerankhira-gif/codex-multi-account-workflows/releases/latest)
+[![Validate](https://github.com/ranveerankhira-gif/codex-multi-account-workflows/actions/workflows/validate.yml/badge.svg)](https://github.com/ranveerankhira-gif/codex-multi-account-workflows/actions/workflows/validate.yml)
 [![Windows](https://img.shields.io/badge/platform-Windows-0078d4)](docs/three-account-parallel-windows.md)
 [![Explicit only](https://img.shields.io/badge/invocation-explicit--only-d97706)](#安全边界)
 [![License: MIT](https://img.shields.io/badge/license-MIT-16a34a)](LICENSE)
+
+## 先选你需要的入口
+
+| 你的目标 | 从这里开始 |
+|---|---|
+| 在一台电脑上同时登录三个互不串号的 Codex 实例 | [三账号并行指南](docs/three-account-parallel-windows.md) |
+| 启动某个已经配置好的隔离实例 | [`Start-CodexProfile.ps1`](parallel-setup/Start-CodexProfile.ps1) |
+| 把当前任务交给另一个本机账号继续 | [`main-account-takeover`](skills/main-account-takeover/SKILL.md) |
+
+**立即使用：**前往 [最新 Release](https://github.com/ranveerankhira-gif/codex-multi-account-workflows/releases/latest)，下载整套启动模板或单独的接力 Skill，并用 `SHA256SUMS.txt` 核对文件。
 
 ## 这不是“实时同步”
 
@@ -41,7 +55,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\parallel-setup\Start-C
 
 ## 安装 Skill
 
-正式版本请从 GitHub Releases 下载，并核对同一版本的 `SHA256SUMS.txt`。
+正式版本请从 [GitHub Releases](https://github.com/ranveerankhira-gif/codex-multi-account-workflows/releases/latest) 下载，并核对同一版本的 `SHA256SUMS.txt`。
 
 1. 下载 `main-account-takeover-<version>.zip`。
 2. 核对 SHA-256，并逐文件阅读 `SKILL.md`、脚本和权限说明。
@@ -77,4 +91,8 @@ python -X utf8 scripts/package_release.py --release all --verify-only
 python -X utf8 -m unittest discover -s scripts/tests -v
 python -X utf8 -m unittest discover -s skills/main-account-takeover/tests -v
 ```
+
+---
+
+如果这套工作流帮你把多个 Codex 账号真正隔离开、又能把任务接得上，欢迎点一个 ⭐，让更多多账号用户找到它。
 
